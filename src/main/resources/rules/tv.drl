@@ -1,0 +1,83 @@
+package com.es.rulesengine.rules
+
+import com.es.rulesengine.model.TV;
+
+
+rule "TV Volume UP"
+	when 
+		m : TV( action == TV.ACTION_VOL_UP )
+	then
+		//do ACTION
+		System.out.println("Action: TV Volume UP");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+		
+rule "TV Volume DOWN"
+	when 
+		m : TV( action == TV.ACTION_VOL_DOWN )
+	then
+		//do ACTION 
+		System.out.println("Action: TV Volume DOWN");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+
+rule "TV Next channel"
+	when 
+		m : TV( action == TV.ACTION_NEXT_CHANNEL )
+	then
+		//do ACTION
+		System.out.println("Action: TV Next channel");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+
+rule "TV Prev channel"
+	when 
+		m : TV( action == TV.ACTION_PREV_CHANNEL)
+	then
+		//do ACTION
+		System.out.println("Action: TV Prev channel");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+
+
+rule "Turn TV ON"
+    when
+        m : TV( status == TV.OFF , nextStatus == TV.ON)
+    then
+    	//Ligar TV
+        m.setStatus( TV.ON );
+        System.out.println( "Turning TV ON...");
+        update( m );
+end
+
+
+rule "Turn TV OFF"
+    when
+        m : TV( status == TV.ON , nextStatus == TV.OFF)
+    then
+        m.setStatus( TV.OFF );
+        System.out.println( "Turning TV OFF...");
+        update( m );
+end
+
+
+		
+/*rule "TV ON"
+	when
+		m : TV ( status == TV.ON )
+	then
+		System.out.println( "TV is ON");
+end
+
+rule "TV OFF"
+	when
+		m : TV ( status == TV.ON )
+	then
+		System.out.println( "TV is OFF");
+end*/
+
+

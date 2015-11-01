@@ -1,0 +1,33 @@
+rule "Max temperature"
+	when 
+		r : Temperature( leituraESP8266 >  )
+	then
+		System.out.println("Action: Turn off relay");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+
+
+rule "Turn ON Relay"
+	when 
+		m : Temp( leituraESP8266 > Temp.Max )
+	then
+		//do ACTION
+		System.out.println("Action: TV Volume UP");
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end
+
+
+
+/*
+rule "Turn OFF Relay"
+	when 
+		r : Relay( leituraESP8266 > Temp.Max )
+	then
+		//do ACTION
+		System.out.println("Action: TV Volume UP");
+		<Send Command to Relay>
+		m.setAction(TV.ACTION_IDLE);
+		update( m );
+end*/
